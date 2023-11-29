@@ -1,5 +1,7 @@
 # IDE/Editor files
 .idea
+.metals
+.bsp
 .ensime
 .ensime_cache/
 scorex.yaml
@@ -13,3 +15,7 @@ target
 # logs
 scorex-errors.log
 *.log
+
+# node
+node_modules
+package-lock.json
