@@ -70,8 +70,8 @@ trait HashTest extends AnyPropSpec
         } else if (digest.isInstanceOf[Digest64]) {
 // force fail
           hash.DigestSize shouldBe 2222
-*/
         }
+*/
       }
     }
   }
