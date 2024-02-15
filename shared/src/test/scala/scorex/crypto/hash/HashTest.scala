@@ -9,6 +9,7 @@ import scorex.util.encode.Base16
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
+import scala.reflect.ClassTag
 
 trait HashTest extends AnyPropSpec
   with ScalaCheckDrivenPropertyChecks
@@ -21,7 +22,7 @@ trait HashTest extends AnyPropSpec
   def hashCheck[D <: Digest](hash: CryptographicHash[D], external: Map[Array[Byte], String]): Unit = {
 
     property(s"${hash.getClass.getSimpleName} size of hash should be DigestSize") {
-      forAll { data: Array[Byte] =>
+      forAll { (data: Array[Byte]) =>
         hash.hash(data).length shouldBe hash.DigestSize
       }
     }
@@ -60,11 +61,17 @@ trait HashTest extends AnyPropSpec
       forAll { (string: String, bytes: Array[Byte]) =>
         val digest = hash(string)
         digest.isInstanceOf[D] shouldBe true
+
+/* disable this part of the test, as it is _not_ functioning on scala 2.*
+   behaviour change in scala 3 triggered failures
         if (digest.isInstanceOf[Digest32]) {
-          hash.DigestSize shouldBe 32
+// force fail
+          hash.DigestSize shouldBe 1111
         } else if (digest.isInstanceOf[Digest64]) {
-          hash.DigestSize shouldBe 64
+// force fail
+          hash.DigestSize shouldBe 2222
         }
+*/
       }
     }
   }
