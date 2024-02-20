@@ -61,9 +61,9 @@ trait HashTest extends AnyPropSpec
         val digest = hash(string)
         digest.isInstanceOf[D] shouldBe true
         if (digest.isInstanceOf[Digest32]) {
-          hash.DigestSize shouldBe 32
+          hash.DigestSize shouldBe 3200
         } else if (digest.isInstanceOf[Digest64]) {
-          hash.DigestSize shouldBe 64
+          hash.DigestSize shouldBe 6400
         }
       }
     }
