@@ -66,6 +66,8 @@ trait HashTest extends AnyPropSpec
           hash.DigestSize shouldBe 32
         } else if (digest.isInstanceOf[Digest64]) {
           hash.DigestSize shouldBe 64
+        } else {
+          true shouldBe false
         }
       }
     }
